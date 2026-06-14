@@ -19,7 +19,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html   { scroll-behavior: smooth; }
 body   { font-family: var(--font-body); background-color: var(--bg); color: var(--black); overflow-x: hidden; font-size: 16px; line-height: 1.75; }
-body.menu-open { overflow: hidden; }
 img    { display: block; max-width: 100%; height: auto; border-radius: 20px; }
 a      { text-decoration: none; color: inherit; transition: color .2s; }
 
@@ -36,40 +35,35 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   transform: translateY(0);
   transition: transform .3s ease, box-shadow .3s ease;
-  /* two-row column layout */
+  /* single-row horizontal layout */
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 16px;
+  flex-wrap: wrap;
 }
 
 .topnav.hidden {
   transform: translateY(-100%);
 }
 
-.topnav.shrink .nav-top-row {
-  padding: 8px 12px 0;
-}
-
-.topnav.shrink .nav-links {
-  padding: 6px 12px 8px;
+.topnav.shrink {
+  padding: 8px 12px;
+  gap: 16px;
 }
 
 /* ── Row 1: logo ── */
 .nav-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 12px 0;
-  position: relative;       /* anchor for hamburger */
-  gap: 8px;
+  display: none;
 }
 
 .lang-select {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: static;
+  transform: none;
   flex-shrink: 0;
+  order: 1;
 }
 
 .lang-select select {
@@ -88,13 +82,12 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
 
 .logo {
   font-family: var(--font-display);
-  font-size: clamp(16px, 3.5vw, 42px);
+  font-size: clamp(18px, 3.5vw, 38px);
   font-weight: 700;
   letter-spacing: 2px;
   text-align: center;
-  flex-shrink: 1;
-  min-width: 0;
-  word-wrap: break-word;
+  flex-shrink: 0;
+  order: 0;
 }
 
 /* ── Row 2: links ── */
@@ -102,85 +95,57 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 1.8vw, 28px);
-  padding: 10px 18px 14px;
-  border-top: 1px solid rgba(0,0,0,0.09);
-  margin-top: 10px;
+  flex-direction: row;
+  gap: 8px;
+  padding: 0;
+  border-top: none;
+  margin-top: 0;
   flex-wrap: wrap;
+  order: 2;
 }
 
 .nav-links a {
-  font-size: clamp(11px, 1.1vw, 12px);
+  font-size: clamp(10px, 1vw, 11px);
   font-weight: 700;
-  letter-spacing: 1.3px;
-  color: var(--black);
-  padding: 6px 0;
-  border-bottom: 2px solid transparent;
-  transition: color .2s, border-color .2s;
+  letter-spacing: 1px;
+  color: var(--white);
+  background-color: var(--accent-dark);
+  padding: 8px 14px;
+  border-radius: 5px;
+  transition: opacity .2s, transform .2s, background-color .2s;
   white-space: nowrap;
   flex-shrink: 0;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--accent-dark);
-  border-bottom-color: var(--accent-dark);
+  opacity: 0.85;
+  transform: translateY(-2px);
+  background-color: var(--accent);
 }
 
-/* ── Hamburger (hidden on desktop) ── */
+/* ── Hamburger (hidden) ── */
 .nav-hamburger {
-  display: none;
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--black);
-  padding: 2px 4px;
-  line-height: 1;
-  flex-shrink: 0;
+  display: none !important;
 }
 
-/* ── Mobile collapse ── */
+/* ── No mobile collapse — horizontal layout on all screens ── */
 @media (max-width: 768px) {
-  .nav-hamburger { display: block; }
-  .nav-top-row { justify-content: space-between; padding: 12px 8px 0; }
-
-  .lang-select {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    margin: 0;
+  .topnav {
+    gap: 12px;
+    padding: 10px 12px;
   }
-
-  .nav-links {
-    display: none;
-    position: fixed;
-    inset: 58px 0 0 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 12px 16px;
-    background: rgba(253,251,247,0.98);
-    backdrop-filter: blur(12px);
-    overflow-y: auto;
-    z-index: 1100;
-    border-top: none;
-    margin-top: 0;
+  
+  .logo {
+    font-size: clamp(14px, 3vw, 32px);
   }
-
+  
   .nav-links a {
-    width: 100%;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.07);
-    font-size: 13px;
+    font-size: 10px;
+    padding: 7px 12px;
   }
-
-  .topnav.open .nav-links { display: flex; }
 }
 
 

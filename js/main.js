@@ -6,9 +6,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   const nav = document.getElementById('myTopnav');
-  const hamburger = document.getElementById('navHamburger');
   const hero = document.getElementById('heroSection');
-  const body = document.body;
 
   // ── Set hero margin = navbar height ───────
   function setHeroMargin() {
@@ -18,32 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   setHeroMargin();
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 768 && nav) {
-      nav.classList.remove('open');
-    }
     setHeroMargin();
   });
-
-  // ── Mobile hamburger toggle ────────────────
-  if (hamburger && nav) {
-    hamburger.addEventListener('click', function () {
-      nav.classList.toggle('open');
-      body.classList.toggle('menu-open');
-      // Recalculate hero offset after menu expands/collapses
-      setTimeout(setHeroMargin, 10);
-    });
-  }
-
-  // ── Close nav when link clicked (mobile) ──
-  if (nav) {
-    nav.querySelectorAll('.nav-links a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        nav.classList.remove('open');
-        body.classList.remove('menu-open');
-        setTimeout(setHeroMargin, 10);
-      });
-    });
-  }
 
   let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
   const scrollThreshold = 20;
