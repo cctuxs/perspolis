@@ -54,10 +54,7 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
   gap: 16px;
 }
 
-/* ── Row 1: logo ── */
-.nav-top-row {
-  display: none;
-}
+
 
 .lang-select {
   position: static;
@@ -80,6 +77,7 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
   cursor: pointer;
 }
 
+/* ── Single-row layout ── */
 .logo {
   font-family: var(--font-display);
   font-size: clamp(18px, 3.5vw, 38px);
@@ -92,28 +90,28 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
 
 /* ── Row 2: links ── */
 .nav-links {
-  display: flex;
+  display: flex !important;
   align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 8px;
-  padding: 0;
+  justify-content: center !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+  padding: 5px !important;
   border-top: none;
   margin-top: 0;
-  flex-wrap: wrap;
   order: 2;
 }
 
 .nav-links a {
-  font-size: clamp(10px, 1vw, 11px);
+  font-size: 0.7rem !important;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: var(--white);
   background-color: var(--accent-dark);
-  padding: 8px 14px;
+  padding: 4px 8px !important;
   border-radius: 5px;
   transition: opacity .2s, transform .2s, background-color .2s;
-  white-space: nowrap;
+  white-space: nowrap !important;
   flex-shrink: 0;
   text-decoration: none;
   display: inline-block;
@@ -126,10 +124,6 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
   background-color: var(--accent);
 }
 
-/* ── Hamburger (hidden) ── */
-.nav-hamburger {
-  display: none !important;
-}
 
 /* ── No mobile collapse — horizontal layout on all screens ── */
 @media (max-width: 768px) {
@@ -142,9 +136,14 @@ a      { text-decoration: none; color: inherit; transition: color .2s; }
     font-size: clamp(14px, 3vw, 32px);
   }
   
+  .nav-links {
+    gap: 4px !important;
+    padding: 5px !important;
+  }
+  
   .nav-links a {
-    font-size: 10px;
-    padding: 7px 12px;
+    font-size: 0.7rem !important;
+    padding: 4px 8px !important;
   }
 }
 
